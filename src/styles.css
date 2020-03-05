@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+html {
+    font-size: 10px;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: #f7f7f7;
+    font-family: "Roboto", sans-serif;
+  }
+  

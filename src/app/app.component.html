@@ -1,0 +1,50 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="main">
+  <div class="template">
+    <div class="left-panel">
+      <a href="http://temasys.io/" class="logo">
+        <img
+          class="img-responsive"
+          src="assets/img/temasys.svg"
+          alt="Skylink JS"
+          width="200px"
+        />
+      </a>
+
+      <div class="notes">
+        <p style="margin-bottom: 0;">
+          <span>Secure</span
+          ><i class="material-icons bounce-1">
+            videocam
+          </i>
+        </p>
+        <p>Video room</p>
+       <div class="check_values">
+        <label for="audio"><input type="checkbox" id="audio" [(ngModel)]="audio" (change)="checkValue(audio)" /> Join with Audio</label>
+        <label for="video"><input type="checkbox" id="video" [(ngModel)]="video" (change)="checkValue(video)" /> Join with Video</label>
+       </div>
+        <button class="add-peer" id="add-peer" (click)="handleJoinRoom()" *ngIf="!isJoined">Click to Join</button>
+        <button class="add-peer" id="add-peer" (click)="handleStartRecording()" *ngIf="isJoined">Start Recording</button>
+        <button class="add-peer" id="add-peer" (click)="handleStopRecording()" *ngIf="isJoined">Stop Recording</button>
+      </div>
+
+      <div class="footer">
+        <p>© 2020 Temasys Communications. All Rights Reserved.</p>
+      </div>
+    </div>
+
+    <div class="boxes">
+      <div id="remoteContainer" class="peers-container">
+        <div class="avatar video-local-avatar">
+          <div id="remoteVideoEl"></div>
+        </div>
+      </div>
+          <div id="localContainer" class="peers-container">
+        <div class="avatar video-local-avatar">
+          <div id="localVideoEl"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -22,7 +22,7 @@
           "styles.css"
         ],
         "scripts": ["assets/js/socket.io.js",
-                    "https://temasys-cdn.s3.amazonaws.com/skylink/skylinkjs/2.x/skylink.complete.umd.js",
+                    "assets/js/skylink.umd.js",
                     "assets/js/SkylinkWrapper.js"],
         "environmentSource": "environments/environment.ts",
         "environments": {

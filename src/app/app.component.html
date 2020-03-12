@@ -23,9 +23,13 @@
         <label for="audio"><input type="checkbox" id="audio" [(ngModel)]="audio" (change)="checkValue(audio)" /> Join with Audio</label>
         <label for="video"><input type="checkbox" id="video" [(ngModel)]="video" (change)="checkValue(video)" /> Join with Video</label>
        </div>
-        <button class="add-peer" id="add-peer" (click)="handleJoinRoom()" *ngIf="!isJoined">Click to Join</button>
+       <p class="note"><small>* Specify the name to join or leave room</small></p>
+       <input class="input-text" type="text" [(ngModel)]="textValue" required>  
+        <button class="add-peer" id="add-peer" (click)="handleJoinRoom()">Click to Join Room</button>
         <button class="add-peer" id="add-peer" (click)="handleStartRecording()" *ngIf="isJoined">Start Recording</button>
         <button class="add-peer" id="add-peer" (click)="handleStopRecording()" *ngIf="isJoined">Stop Recording</button>
+        <button class="add-peer" id="add-peer" (click)="handleLeaveRoom()" *ngIf="isJoined">Leave Room</button>
+        <button class="add-peer" id="add-peer" (click)="handleLeaveAllRoom()" *ngIf="isJoined">Leave All Rooms</button>
       </div>
 
       <div class="footer">
@@ -34,6 +38,14 @@
     </div>
 
     <div class="boxes">
+      <div id="message">
+        <h3>Chat Messages</h3>
+        <div id="messageContent">
+
+        </div>
+        <input class="input-message" type="text" [(ngModel)]="message" required>  
+        <button class="add-peer" id="add-peer" (click)="sendMessage()" *ngIf="isJoined">Send Message</button>
+      </div>
       <div id="remoteContainer" class="peers-container">
         <div class="avatar video-local-avatar">
           <div id="remoteVideoEl"></div>

@@ -54,11 +54,15 @@ let SkylinkWrapper = {
     },
 
     startRecording: function(roomName) {
-        skylink.startRecording(roomName);
+        skylink.startRecording(roomName).then(() => {
+            console.log("Recording started")
+        })
     },
 
     stopRecording: function(roomName) {
-        skylink.stopRecording(roomName);
+        skylink.stopRecording(roomName).then(() => {
+            console.log("Recording stopped")
+        });
     },
 
     leaveRoom: function(location) {
@@ -85,7 +89,7 @@ let SkylinkWrapper = {
 
     onIncomingStream: function() {
         skylinkEventManager.addEventListener(skylinkConstants.EVENTS.ON_INCOMING_STREAM, evt => {
-            
+
             const { stream, isSelf, peerId, room, isReplace, streamId, isVideo, isAudio } = evt.detail;
             if(isSelf) {
                 const localVideoElem = document.getElementById("localVideoEl");
@@ -144,7 +148,7 @@ let SkylinkWrapper = {
             Array.from(document.getElementsByClassName(evt.detail.peerId)).forEach(function(item) {
                 item.parentNode.removeChild(item)
                 });
-    
+
           });
 
           skylinkEventManager.addEventListener(skylinkConstants.EVENTS.ON_INCOMING_MESSAGE, function(e) {
@@ -156,7 +160,7 @@ let SkylinkWrapper = {
                 msg.innerHTML = "<span style='color: #ec2526; font-size: 1rem'>(Remote ) </span>" + message.content;
                 elem.appendChild(msg);
             }
-            
+
           });
     }
 }

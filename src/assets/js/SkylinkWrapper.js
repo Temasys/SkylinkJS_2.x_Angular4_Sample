@@ -4,6 +4,7 @@ let SkylinkWrapper = {
     skylinkEventManager: undefined,
     skylinkConstants: undefined,
     leaveRoomName: undefined,
+    obj:undefined,
 
     /**
      * Initializes the SkylinkWrapper. Internally, it executes
@@ -53,15 +54,19 @@ let SkylinkWrapper = {
           })
     },
 
+    getObject: function() {
+        return obj;
+    },
+
     startRecording: function(roomName) {
         skylink.startRecording(roomName).then(() => {
-            console.log("Recording started")
-        })
+            console.log("Recording Start")
+        });
     },
 
     stopRecording: function(roomName) {
         skylink.stopRecording(roomName).then(() => {
-            console.log("Recording stopped")
+            console.log("Recording Stopped")
         });
     },
 
@@ -89,8 +94,10 @@ let SkylinkWrapper = {
 
     onIncomingStream: function() {
         skylinkEventManager.addEventListener(skylinkConstants.EVENTS.ON_INCOMING_STREAM, evt => {
-
+            
             const { stream, isSelf, peerId, room, isReplace, streamId, isVideo, isAudio } = evt.detail;
+            // here am assigning an evt detail object 
+            obj = evt.detail;
             if(isSelf) {
                 const localVideoElem = document.getElementById("localVideoEl");
                 const videoElem = document.createElement('video');
@@ -148,7 +155,7 @@ let SkylinkWrapper = {
             Array.from(document.getElementsByClassName(evt.detail.peerId)).forEach(function(item) {
                 item.parentNode.removeChild(item)
                 });
-
+    
           });
 
           skylinkEventManager.addEventListener(skylinkConstants.EVENTS.ON_INCOMING_MESSAGE, function(e) {
@@ -160,7 +167,7 @@ let SkylinkWrapper = {
                 msg.innerHTML = "<span style='color: #ec2526; font-size: 1rem'>(Remote ) </span>" + message.content;
                 elem.appendChild(msg);
             }
-
+            
           });
     }
 }

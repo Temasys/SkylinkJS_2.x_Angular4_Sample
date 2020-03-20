@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 declare var SkylinkWrapper: any;
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  private appKey = 'xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
-  private defaultRoom = 'Default';
+  private appKey = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx";
+  private defaultRoom = "Default";
   private enableDataChannel = true;
   private enableIceTrickle = true;
   private audioFallback = true;
@@ -18,11 +18,11 @@ export class AppComponent {
   private streams = [];
   private isJoined = false;
   private isRecording = false;
-  private textValue = 'Default';
-  private message = '';
+  private textValue = "Default";
+  private message = "";
 
   constructor() {
-    if(!this.isJoined) {
+    if (!this.isJoined) {
       this.isJoined = true;
       SkylinkWrapper.init({
         appKey: this.appKey,
@@ -37,39 +37,43 @@ export class AppComponent {
     }
   }
 
-  checkValue(val: any){
+  checkValue(val: any) {
     this[val] = val;
   }
 
   handleJoinRoom() {
-    SkylinkWrapper.start({audio: this.audio,
+    SkylinkWrapper.start({
+      audio: this.audio,
       video: this.video,
-      defaultRoom: this.textValue});
+      defaultRoom: this.textValue
+    });
   }
 
-handleLeaveRoom() {
-  SkylinkWrapper.leaveRoom(this.textValue)
-}
+  handleLeaveRoom() {
+    SkylinkWrapper.leaveRoom(this.textValue);
+  }
 
-handleLeaveAllRoom() {
-  SkylinkWrapper.leaveAllRoom()
-}
+  handleGetObject() {
+    console.log(SkylinkWrapper.getObject());
+  }
 
-handleStartRecording() {
-  if(this.isRecording) return;
-  this.isRecording = true;
-  SkylinkWrapper.startRecording(this.textValue);
-}
+  handleLeaveAllRoom() {
+    SkylinkWrapper.leaveAllRoom();
+  }
 
-handleStopRecording() {
-  if(!this.isRecording) return;
-  SkylinkWrapper.stopRecording(this.textValue);
-}
+  handleStartRecording() {
+    if (this.isRecording) return;
+    this.isRecording = true;
+    SkylinkWrapper.startRecording(this.textValue);
+  }
 
-sendMessage() {
-  SkylinkWrapper.sendMessageP2P(this.textValue, this.message);
-  this.message = "";
-}
+  handleStopRecording() {
+    if (!this.isRecording) return;
+    SkylinkWrapper.stopRecording(this.textValue);
+  }
 
+  sendMessage() {
+    SkylinkWrapper.sendMessageP2P(this.textValue, this.message);
+    this.message = "";
+  }
 }
-
